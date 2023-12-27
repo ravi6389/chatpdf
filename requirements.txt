@@ -1,2 +1,4 @@
 streamlit
 huggingface
+streamlit_extras
+langchain
