@@ -20,9 +20,6 @@ import base64
 import os
 
 
-os.environ['HUGGINGFACEHUB_API_TOKEN'] = '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'
-os.environ['CURL_CA_BUNDLE'] = ''
-#token_access = "<your token access>"
 with st.sidebar:
     st.title('PDF BASED LLM-LANGCHAIN CHATBOT')
     st.markdown('''
