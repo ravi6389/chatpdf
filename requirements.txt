@@ -3,3 +3,6 @@ huggingface
 streamlit_extras
 langchain
 PyPDF2
+transformers
+InstructorEmbedding
+
