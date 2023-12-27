@@ -1,24 +1,30 @@
 import streamlit as st
 from streamlit_extras.add_vertical_space import add_vertical_space
 
-
+from langchain.chat_models import ChatOpenAI
 from PyPDF2 import PdfFileReader, PdfFileWriter,PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.embeddings import HuggingFaceInstructEmbeddings
 from langchain.vectorstores import FAISS
-from langchain.llms import OpenAI
+#from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
+from langchain.llms import HuggingFaceHub
+
 
 import pickle
 import os
 #load api key lib
 #from dotenv import load_dotenv
 import base64
+import os
 
 
+os.environ['HUGGINGFACEHUB_API_TOKEN'] = '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'
+os.environ['CURL_CA_BUNDLE'] = ''
+#token_access = "<your token access>"
 with st.sidebar:
-    st.title('🦜️🔗VK - PDF BASED LLM-LANGCHAIN CHATBOT🤗')
+    st.title('PDF BASED LLM-LANGCHAIN CHATBOT')
     st.markdown('''
     ## About APP:
 
@@ -26,24 +32,26 @@ with st.sidebar:
 
     - [streamlit](https://streamlit.io/)
     - [Langchain](https://docs.langchain.com/docs/)
-    - [OpenAI](https://openai.com/)
+    - [HuggingFace](https://huggingface.co/)
 
     ## About me:
 
-    - [Linkedin](https://www.linkedin.com/in/venkat-vk/)
+    - [Linkedin](https://www.linkedin.com/in/ravi-shankar-prasad-371825101/)
     
     ''')
 
     add_vertical_space(4)
-    st.write('💡All about pdf based chatbot, created by VK🤗')
+    st.write('💡All about pdf based chatbot, created by Ravi Prasad🤗')
 
 def main():
     st.header("📄Chat with your pdf file🤗")
 
     #upload a your pdf file
     pdf = st.file_uploader("Upload your PDF", type='pdf')
-    st.write(pdf.name)
-
+    try:
+        st.write(pdf.name)
+    except:
+        pass
     if pdf is not None:
         pdf_reader = PdfReader(pdf)
 
@@ -70,8 +78,8 @@ def main():
             #st.write("Already, Embeddings loaded from the your folder (disks)")
         else:
             #embedding (Openai methods) 
-            embeddings = OpenAIEmbeddings()
-
+            #embeddings = OpenAIEmbeddings()
+            embeddings = HuggingFaceInstructEmbeddings(model_name = "hkunlp/instructor-xl")
             #Store the chunks part in db (vector)
             vectorstore = FAISS.from_texts(chunks,embedding=embeddings)
 
@@ -92,7 +100,8 @@ def main():
             #st.write(docs)
             
             #openai rank lnv process
-            llm = OpenAI(temperature=0)
+            #llm = ChatOpenAI(openai_api_key="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")
+            llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":0.5, "max_length":512})
             chain = load_qa_chain(llm=llm, chain_type= "stuff")
             
             with get_openai_callback() as cb:
@@ -100,7 +109,8 @@ def main():
                 print(cb)
             st.write(response)
 
-
+    else:
+        st.write('Please upload the PDF to get started')
 
 if __name__=="__main__":
     main()
