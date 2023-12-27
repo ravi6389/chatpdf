@@ -2,3 +2,4 @@ streamlit
 huggingface
 streamlit_extras
 langchain
+PyPDF2
