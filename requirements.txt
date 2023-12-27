@@ -6,3 +6,4 @@ PyPDF2
 transformers
 InstructorEmbedding
 huggingface_hub
+sentence_transformers
