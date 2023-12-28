@@ -1,9 +1,8 @@
-streamlit
+streamlit>=1.10.0
 huggingface
 streamlit_extras
 langchain
 PyPDF2
-transformers
 InstructorEmbedding
 huggingface_hub
 sentence_transformers
