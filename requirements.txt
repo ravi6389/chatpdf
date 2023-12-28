@@ -1,5 +1,4 @@
 streamlit>=1.10.0
-streamlit_extras
 langchain
 PyPDF2
 sentence_transformers
