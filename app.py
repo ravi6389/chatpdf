@@ -1,7 +1,6 @@
 import streamlit as st
-from streamlit_extras.add_vertical_space import add_vertical_space
 
-from langchain.chat_models import ChatOpenAI
+
 from PyPDF2 import PdfFileReader, PdfFileWriter,PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import HuggingFaceInstructEmbeddings
@@ -19,26 +18,8 @@ import os
 import base64
 import os
 
-
-with st.sidebar:
-    st.title('PDF BASED LLM-LANGCHAIN CHATBOT')
-    st.markdown('''
-    ## About APP:
-
-    The app's primary resource is utilised to create::
-
-    - [streamlit](https://streamlit.io/)
-    - [Langchain](https://docs.langchain.com/docs/)
-    - [HuggingFace](https://huggingface.co/)
-
-    ## About me:
-
-    - [Linkedin](https://www.linkedin.com/in/ravi-shankar-prasad-371825101/)
-    
-    ''')
-
-    add_vertical_space(4)
-    st.write('💡All about pdf based chatbot, created by Ravi Prasad🤗')
+os.environ['HUGGINGFACEHUB_API_TOKEN'] = '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'
+os.environ['CURL_CA_BUNDLE'] = ''
 
 def main():
     st.header("📄Chat with your pdf file🤗")
