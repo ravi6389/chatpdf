@@ -18,9 +18,6 @@ import os
 import base64
 import os
 
-os.environ['HUGGINGFACEHUB_API_TOKEN'] = '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'
-os.environ['CURL_CA_BUNDLE'] = ''
-
 def main():
     st.header("📄Chat with your pdf file🤗")
 
