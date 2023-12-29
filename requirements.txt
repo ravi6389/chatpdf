@@ -4,3 +4,4 @@ PyPDF2
 sentence_transformers
 InstructorEmbedding
 huggingface
+faiss-cpu
