@@ -4,4 +4,4 @@ PyPDF2
 sentence_transformers
 InstructorEmbedding
 huggingface
-faiss-cpu
+FAISS-cpu==1.7.4
